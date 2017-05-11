@@ -9,6 +9,7 @@
   "author": "Marcel Jurtz",
   "license": "MIT",
   "devDependencies": {
+    "electron": "^1.6.7",
     "electron-prebuilt": "^0.25.1"
   }
 }
