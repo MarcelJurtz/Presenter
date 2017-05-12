@@ -30,21 +30,22 @@ app.on('ready', function() {
   const hostname = '127.0.0.1';
   const port = 3000;
 
-  updateCString(mainWin, "Server gestartet...");
+  updateCString(mainWin, "Server started on port " + port);
 
   function handleRequest(request, response) {
 
+    var ip = getRemoteIP(request);
+
     // GET -> Lade Website
     if (request.method == 'GET' && request.url == '/') {
-      updateCString(mainWin, getRemoteIP(request) + " - GET-Anfrage");
+      updateCString(mainWin, ip + " - GET request received");
 
       response.writeHead(200, {
         "Content-Type": "text\plain"
       });
       fs.createReadStream('./index.html').pipe(response);
-    } else if (request.method === 'POST' && request.url == '/do-work') {
-      updateCString(mainWin, getRemoteIP(request) + " - POST-Anfrage");
-      // asuming sync as in your exampl
+    } else if (request.method === 'POST' && request.url == '/act') {
+      updateCString(mainWin, ip + " - POST request received");
       let resultX = handleInteraction(request.body);
       response.writeHead(200, {
         "Content-Type": "application/json"
@@ -54,8 +55,7 @@ app.on('ready', function() {
       }));
       response.end();
     } else {
-      updateCString(mainWin, getRemoteIP(request) + " - Fehlerhafte Anfrage (404)");
-      console.log(request.method);
+      updateCString(mainWin, ip + " - Unavailable site requested: " + request.url);
       response.writeHead(404, {
         "Content-Type": "application/json"
       });
@@ -67,17 +67,21 @@ app.on('ready', function() {
   server.listen(port);
 });
 
+// Update loggin-text
+// displayed in electron mainWin
 function updateCString(mainWin, text) {
   contentString += getFormattedDate() + " " + text;
   contentString += "<br />";
   mainWin.loadURL("data:text/html;charset=utf-8," + encodeURI(contentString));
 }
 
+// Handle interaction to achieve 'right-arrow-click' functionality
 function handleInteraction(content) {
   robot.keyTap("right");
   return "Forward";
 }
 
+// Get timestamp for logging
 function getFormattedDate() {
   var currentdate = new Date();
   var timestamp = "";
@@ -91,6 +95,8 @@ function getFormattedDate() {
   return timestamp;
 }
 
+// Get remote IP for logging
+// requires 'Request'-object from handleRequest()
 function getRemoteIP(request) {
   var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress || request.socket.remoteAddress || request.connection.socket.remoteAddress;
   return ip;
