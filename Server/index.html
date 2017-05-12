@@ -1,0 +1,36 @@
+<html>
+
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#button').click(function() {
+          //var data = "forward";
+          $.ajax({
+            type: 'POST',
+            //data: JSON.stringify(data),
+            data: {
+                 blob: {action:"forward"}
+             },
+            contentType: "application/json",
+            //contentType: "application/x-www-form-urlencoded",
+            dataType: 'json',
+            //url: 'http://localhost:3000/do-work',
+            url: '/do-work',
+            success: function(data) {
+              console.log('success');
+              console.log(JSON.stringify(data));
+            },
+            error: function(error) {
+              console.log("some error in fetching the notifications");
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <form>
+    <div id="button"><input type="button" value="Submit" /></div>
+  </form>
+
+</html>

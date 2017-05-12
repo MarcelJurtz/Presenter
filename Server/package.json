@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "rebuild": "npm rebuild --runtime=electron --target=1.6.7 --disturl=https://atom.io/download/atom-shell --abi=48"
   },
   "author": "Marcel Jurtz",
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.6.7",
-    "electron-prebuilt": "^0.25.1"
+    "node-key-sender": "^1.0.9",
+    "robotjs": "^0.4.7"
   }
 }
