@@ -1,17 +1,12 @@
 const electron = require('electron');
+const robot = require("robotjs");
+const fs = require('fs');
 const {
   app,
   BrowserWindow
 } = electron;
-var robot = require("robotjs");
 
-//var app = require('app');  // Module to control application life.
-//var BrowserWin = require('browser-window');  // Module to create native browser window.
 var mainWin = null;
-var ks = require('node-key-sender');
-
-
-var fs = require('fs');
 var contentString;
 
 app.on('ready', function() {
