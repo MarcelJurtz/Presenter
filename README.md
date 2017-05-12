@@ -1,21 +1,19 @@
-# RemoteMouse
-RemoteMouse based on JavaScript / Node
+# Presenter
 
-This repository will contain the code of my planned project, a remote mouse, platform independent using electron, nodeJS, and JavaScript.
+Presenter for PowerPoint / similar slideshows. Based on JavaScript / Node using electron.
 
-## Idea Collection
+## Status
 
-Features to be implemented:
-* Remote mouse, left-click, right-click, mousewheel-click
-* User authentification
-* Multiple users at the same time (optional)
+Running, Errorlog working.
 
-Main reason on this repo is to learn node.
+## ToDo
 
-## Modules to look at
+* Titlebar needs to be adjusted
+* Authentification (via IP maybe?)
+* Multi-user-functionality?
+* Back-button needs to be added
 
-* robotJS
-* async
-* mongoose
-* express
-* body-parser
+## Modules to be installed
+
+* electron
+* robotJS for keyboard-automation

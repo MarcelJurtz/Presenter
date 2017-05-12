@@ -1,6 +1,8 @@
 const electron = require('electron');
 const robot = require("robotjs");
 const fs = require('fs');
+const http = require('http');
+
 const {
   app,
   BrowserWindow
@@ -19,8 +21,6 @@ app.on('ready', function() {
 
   // Remove Menu-Bar
   mainWin.setMenu(null);
-
-  const http = require('http');
 
   const hostname = '127.0.0.1';
   const port = 3000;
