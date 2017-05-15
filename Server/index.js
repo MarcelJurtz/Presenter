@@ -25,8 +25,6 @@ app.on('ready', function() {
   const hostname = '127.0.0.1';
   const port = 3000;
 
-  updateCString(mainWin, "Server started on port " + port);
-
   function handleRequest(request, response) {
 
     var ip = getRemoteIP(request);
@@ -60,6 +58,7 @@ app.on('ready', function() {
 
   var server = http.createServer(handleRequest);
   server.listen(port);
+  updateCString(mainWin, "Server started:" + server.address().address + ":" + port);
 });
 
 // Update loggin-text
