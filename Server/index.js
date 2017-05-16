@@ -1,7 +1,9 @@
 const electron = require('electron');
 const robot = require("robotjs");
 const fs = require('fs');
-const http = require('http');
+//const http = require('http');
+const express = require('express');
+const cors = require('cors');
 
 const {
   app,
@@ -22,57 +24,58 @@ app.on('ready', function() {
   // Remove Menu-Bar
   mainWin.setMenu(null);
 
-  const hostname = '127.0.0.1';
   const port = 3000;
 
-  function handleRequest(request, response) {
+  var app = express();
+  app.use(cors())
 
+  app.post('/remote', function (request, response, next) {
+
+    response.json({msg: 'This is CORS-enabled for all origins!'});
     var ip = getRemoteIP(request);
 
     // GET -> Lade Website
-    if (request.method == 'GET' && request.url == '/') {
-      updateCString(mainWin, ip + " - GET request received");
-
-      response.writeHead(200, {
-        "Content-Type": "text\plain"
-      });
-      fs.createReadStream('./index.html').pipe(response);
-    } else if (request.method === 'POST' && request.url == '/act') {
+    if (request.method === 'POST') {
       updateCString(mainWin, ip + " - POST request received");
-      let resultX = handleInteraction(request.body);
+      robot.keyTap("right");
+
       response.writeHead(200, {
         "Content-Type": "application/json"
       });
+      /*
       response.write(JSON.stringify({
         result: resultX
       }));
+      */
       response.end();
     } else {
-      updateCString(mainWin, ip + " - Unavailable site requested: " + request.url);
+      updateCString(mainWin, ip + " - Error requesting " + request.url + "using " + request.method);
       response.writeHead(404, {
         "Content-Type": "application/json"
       });
       response.end();
     }
-  }
+  });
 
-  var server = http.createServer(handleRequest);
-  server.listen(port);
-  updateCString(mainWin, "Server started:" + server.address().address + ":" + port);
+  app.post('/act', function (request, response, next) {
+    updateCString(mainWin, "received GET /act request");
+  });
+
+  app.get('/youtube', function (request, response, next) {});
+
+  app.listen(port, function () {
+    updateCString(mainWin, 'CORS-enabled web server listening on port ' + port);
+  });
 });
+
 
 // Update loggin-text
 // displayed in electron mainWin
 function updateCString(mainWin, text) {
   contentString += getFormattedDate() + " " + text;
   contentString += "<br />";
-  mainWin.loadURL("data:text/html;charset=utf-8," + encodeURI(contentString));
-}
-
-// Handle interaction to achieve 'right-arrow-click' functionality
-function handleInteraction(content) {
-  robot.keyTap("right");
-  return "Forward";
+  //mainWin.loadURL("data:text/html;charset=utf-8," + encodeURI(contentString));
+  console.log(text);
 }
 
 // Get timestamp for logging

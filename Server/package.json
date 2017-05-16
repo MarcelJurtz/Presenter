@@ -13,5 +13,9 @@
     "electron": "^1.6.7",
     "node-key-sender": "^1.0.9",
     "robotjs": "^0.4.7"
+  },
+  "dependencies": {
+    "cors": "^2.8.3",
+    "express": "^4.15.2"
   }
 }
