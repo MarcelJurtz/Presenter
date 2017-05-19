@@ -29,16 +29,12 @@ app.on('ready', function() {
   var app = express();
   app.use(cors());
 
-  app.post('/remote/forward', function(request, response, next) {
+  // instead of two app.post functions, use this one
+  app.get('/remote/:key', function(request, response, next) {
     var ip = getRemoteIP(request);
-    updateCString(mainWin, ip + " - presenter - forward");
-    robot.keyTap("right");
-  });
-
-  app.post('/remote/backward', function(request, response, next) {
-    var ip = getRemoteIP(request);
-    updateCString(mainWin, ip + " - presenter - backward");
-    robot.keyTap("left");
+    updateCString(mainWin, ip + " - presenter - " + request.params.key);
+    robot.keyTap(request.params.key);
+    response.send(request.params.key + ' key pressed');
   });
 
   app.post('/act', function(request, response, next) {
