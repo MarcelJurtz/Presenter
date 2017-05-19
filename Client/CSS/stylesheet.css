@@ -11,7 +11,7 @@ body {
 header {
   position: fixed;
   top: 0;
-  height: 10px;
+  height: 20px;
   width: 100%;
   background-color: #008fff;
 }
@@ -19,16 +19,16 @@ header {
 footer {
   position: fixed;
   bottom: 0;
-  height: 10px;
+  height: 20px;
   width: 100%;
   background-color: #008fff;
 }
 
 .buttonContainer {
-  width: 80%;
-  margin: 10px auto 10px;
-  border: 3px solid #161618;
-  border-radius: 5px;
+  width: 90%;
+  margin: 20px auto 20px;
+  border: 20px solid #161618;
+  border-radius: 40px;
   padding-top: 10px;
 }
 
@@ -37,30 +37,53 @@ footer {
   text-align: center;
 }
 
-
-.rotRight {
-  webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
+.buttonContainer i {
+  font-size: 20em !important;
 }
 
-.rotLeft {
-  webkit-transform: rotate(270deg);
-  -moz-transform: rotate(270deg);
-  -o-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg);
+.buttonContainer p {
+  font-size: 10em;
 }
 
-#wrapper div {
-  text-align: center;
-}
+/* Presentation Remote */
 
-#wrapper {
-  right: 50%;
-    bottom: 50%;
-    transform: translate(50%,50%);
+.outer {
+    display: table;
     position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: /*whatever width you want*/;
+}
+
+.inner .two {
+  text-align: center;
+  width: 50%;
+  float: left;
+  vertical-align: middle;
+}
+
+.inner .three {
+  text-align: center;
+  width: 33%;
+  float: left;
+  vertical-align: middle;
+}
+
+
+.iRemote {
+  font-size: 28em !important;
+}
+
+.iYouTube {
+  font-size: 16em !important;
 }

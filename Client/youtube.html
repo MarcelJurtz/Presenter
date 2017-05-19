@@ -12,11 +12,14 @@
     <div class="outer">
       <div class="middle">
         <div class="inner">
-          <div class="two" id="left" onclick="sendBackwardsRequest()">
-            <i class="iRemote fa fa-caret-left"></i>
+          <div class="three" id="left" onclick="sendRewindRequest()">
+            <i class="iYouTube fa fa-backward"></i>
           </div>
-          <div class="two" id="right" onclick="sendForwardRequest()">
-            <i class="iRemote fa fa-caret-right"></i>
+          <div class="three" id="middle" onclick="sendPlayPauseRequest()">
+            <i id="cmdPlayPause" class="iYouTube fa fa-play"></i>
+          </div>
+          <div class="three" id="right" onclick="sendFastForwardRequest()">
+            <i class="iYouTube fa fa-forward"></i>
           </div>
         </div>
       </div>

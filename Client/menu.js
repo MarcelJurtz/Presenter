@@ -3,7 +3,7 @@ function startPresenter() {
 }
 
 function startYTRemote() {
-
+  navigate("youtube.html");
 }
 
 function startRemoteMouse() {
@@ -15,10 +15,5 @@ function startSettings() {
 }
 
 function navigate(url) {
-  /*
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", url, false);
-  xmlhttp.send();
-  return xmlhttp.responseText;*/
   window.open(url, "_self");
 }
