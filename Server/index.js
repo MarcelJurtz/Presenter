@@ -27,43 +27,27 @@ app.on('ready', function() {
   const port = 3000;
 
   var app = express();
-  app.use(cors())
+  app.use(cors());
 
-  app.post('/remote', function (request, response, next) {
-
-    response.json({msg: 'This is CORS-enabled for all origins!'});
+  app.post('/remote/forward', function(request, response, next) {
     var ip = getRemoteIP(request);
-
-    // GET -> Lade Website
-    if (request.method === 'POST') {
-      updateCString(mainWin, ip + " - POST request received");
-      robot.keyTap("right");
-
-      response.writeHead(200, {
-        "Content-Type": "application/json"
-      });
-      /*
-      response.write(JSON.stringify({
-        result: resultX
-      }));
-      */
-      response.end();
-    } else {
-      updateCString(mainWin, ip + " - Error requesting " + request.url + "using " + request.method);
-      response.writeHead(404, {
-        "Content-Type": "application/json"
-      });
-      response.end();
-    }
+    updateCString(mainWin, ip + " - presenter - forward");
+    robot.keyTap("right");
   });
 
-  app.post('/act', function (request, response, next) {
+  app.post('/remote/backward', function(request, response, next) {
+    var ip = getRemoteIP(request);
+    updateCString(mainWin, ip + " - presenter - backward");
+    robot.keyTap("left");
+  });
+
+  app.post('/act', function(request, response, next) {
     updateCString(mainWin, "received GET /act request");
   });
 
-  app.get('/youtube', function (request, response, next) {});
+  app.get('/youtube', function(request, response, next) {});
 
-  app.listen(port, function () {
+  app.listen(port, function() {
     updateCString(mainWin, 'CORS-enabled web server listening on port ' + port);
   });
 });
@@ -74,27 +58,22 @@ app.on('ready', function() {
 function updateCString(mainWin, text) {
   contentString += getFormattedDate() + " " + text;
   contentString += "<br />";
-  //mainWin.loadURL("data:text/html;charset=utf-8," + encodeURI(contentString));
-  console.log(text);
+  mainWin.loadURL("data:text/html;charset=utf-8," + encodeURI(contentString));
+  //console.log(text);
 }
 
 // Get timestamp for logging
 function getFormattedDate() {
-  var currentdate = new Date();
-  var timestamp = "";
-  if (currentdate.getHours < 10) timestamp += "0" + currentdate.getHours() + ":";
-  else timestamp += currentdate.getHours() + ":";
-  if (currentdate.getMinutes < 10) timestamp += "0" + currentdate.getMinutes() + ":";
-  else timestamp += currentdate.getMinutes() + ":";
-  if (currentdate.getSeconds < 10) timestamp += "0" + currentdate.getSeconds() + ":";
-  else timestamp += currentdate.getSeconds();
-
-  return timestamp;
+  var d = new Date();
+  d = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + d.getDate()).slice(-2) + " " + ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ('0' + d.getSeconds()).slice(-2);
+  return d;
 }
 
 // Get remote IP for logging
 // requires 'Request'-object from handleRequest()
 function getRemoteIP(request) {
   var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress || request.socket.remoteAddress || request.connection.socket.remoteAddress;
+  // IPv4 is mapped to IPv6, this reverts this
+  ip = ip.replace(/^.*:/, '');
   return ip;
 }
