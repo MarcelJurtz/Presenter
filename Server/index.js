@@ -7,7 +7,8 @@ const cors = require('cors');
 
 const {
   app,
-  BrowserWindow
+  BrowserWindow,
+  dialog
 } = electron;
 
 var mainWin = null;
@@ -36,6 +37,29 @@ app.on('ready', function() {
     updateCString(mainWin, ip + " - presenter - " + request.params.key);
     robot.keyTap(request.params.key);
     response.send(request.params.key + ' key pressed');
+  });
+
+  app.get('/register/:name', function(request,response,next) {
+    var ip = getRemoteIP(request);
+    var buttonPress = false;
+
+    dialog.showMessageBox(
+      { message: "Remote device " + request.params.name + " (" + ip + ") requests access.",
+        buttons: ["ALLOW","DENY"]
+      }, function(response) {
+        if(response == 0) {
+          // Allow
+          var devices = JSON.parse(localStorage.getItem("devices"));
+          devices.push(request.params.name);
+          localStorage.setItem("devices", JSON.stringify(devices));
+          response.send("Registration accepted");
+          updateCString(mainWin, ip + " - Registration accepted: " + request.params.name);
+        } else {
+          response.send("Registration denied");
+          updateCString(mainWin, ip + " - Registration denied: " + request.params.name);
+        }
+      }
+    );
   });
 
   app.post('/act', function(request, response, next) {
