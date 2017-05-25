@@ -32,6 +32,18 @@ footer {
   padding-top: 10px;
 }
 
+.smallButtonContainer {
+  width: 90%;
+  height: 200px;
+  line-height: 200px;
+  margin: 20px auto 20px;
+  text-align: center;
+}
+
+.smallButtonContainer span {
+  vertical-align: middle;
+}
+
 .buttonContainer * {
   width: 100%;
   text-align: center;
@@ -86,4 +98,63 @@ footer {
 
 .iYouTube {
   font-size: 16em !important;
+}
+
+#txtDevName {
+  height: 150px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #008fff;
+  padding-top: 10px;
+}
+
+.inputContainer {
+  width: 90%;
+  margin: 20px auto 20px;
+}
+
+.smallBorder {
+  border: 5px solid #161618;
+  border-radius: 10px;
+}
+
+.heading {
+  font-size: 5em;
+}
+
+.settingsTab {
+  width: 100%;
+}
+
+.key {
+  width: 20%;
+}
+
+.value {
+  width: 80%;
+}
+
+.value input {
+  width: 100%;
+}
+
+
+.info {
+    width:350px;
+    height:40px;
+    height:auto;
+    position:absolute;
+    left:50%;
+    margin-left:-175px;
+    bottom:10px;
+    background-color: #008fff;
+    border: 3px solid #161618;
+    color: #161618;
+    font-size: 50px;
+    padding:10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
 }

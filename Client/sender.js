@@ -1,6 +1,10 @@
 // General sinle-key sending
 function sendKey(key) {
-  return $.get('http://192.168.2.110:3000/remote/' + key)
+  return $.get('http://192.168.2.110:3000/remote/' + key);
+}
+
+function sendRegister(name) {
+  return $.get('http://192.168.2.110:3000/register/' + name);
 }
 
 //##########################################################
@@ -40,5 +44,19 @@ function sendPlayPauseRequest() {
     // TODO: Determine the starting point (play or pause)
   }).fail(function(error) {
     console.log("Error play-pause");
+  });
+}
+
+//##########################################################
+//                          Settings                       #
+//##########################################################
+
+function sendRegisterRequest() {
+  var successful = false;
+  var name = localStorage.getItem("deviceName");
+  sendRegister(name).done(function(response) {
+    $('.registerOk').fadeIn(400).delay(3000).fadeOut(400);
+  }).fail(function(error) {
+    $('.registerFail').fadeIn(400).delay(3000).fadeOut(400);
   });
 }

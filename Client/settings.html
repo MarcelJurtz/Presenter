@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <link href="CSS/stylesheet.css" type="text/css" rel="stylesheet" />
+    <link href="CSS/font-awesome.min.css" type="text/css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <div class="inputContainer">
+      <table class="settingsTab">
+        <tr>
+          <td class="key heading">
+            Device:
+          </td>
+          <td class="value">
+            <input class="smallBorder heading" id="txtDevName" type="text" name="txtDevName" />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="smallButtonContainer smallBorder heading" id="cmdSaveDevName" onclick="SetDeviceName()">
+      <span>Save</span>
+    </div>
+    <div class="smallButtonContainer smallBorder heading" id="cmdRegister" onclick="sendRegisterRequest()">
+      <span>Register</span>
+    </div>
+    <div class='info' style='display:none'>Entry saved!</div>
+    <div class='registerOk' style='display:none'>Entry saved!</div>
+    <div class='registerFail' style='display:none'>Entry saved!</div>
+    <script src="sender.js"></script>
+    <script src="storage.js"></script>
+  </body>
+
+</html>

@@ -11,7 +11,7 @@ function startRemoteMouse() {
 }
 
 function startSettings() {
-
+  navigate("settings.html");
 }
 
 function navigate(url) {
