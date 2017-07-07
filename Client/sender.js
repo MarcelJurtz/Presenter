@@ -39,9 +39,8 @@ function sendPlayPauseRequest() {
   var successful = false;
   sendKey('k').done(function(response) {
     console.log("Play-pause request successfully finished");
-    $("#cmdPlayPause").toggleClass("fa-play");
-    $("#cmdPlayPause").toggleClass("fa-pause");
-    // TODO: Determine the starting point (play or pause)
+    // $("#cmdPlayPause").toggleClass("fa-play");
+    // $("#cmdPlayPause").toggleClass("fa-pause");
   }).fail(function(error) {
     console.log("Error play-pause");
   });
